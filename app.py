@@ -1,14 +1,17 @@
+from io import StringIO
+
 import pandas as pd
 import streamlit as st
 
 from attrition import AUDIT_COLUMNS, REQUIRED as EMP_REQUIRED, load_employees, train_and_evaluate
-from data import DATA_DIR, REQUIRED_COLUMNS, SAMPLE_PATH, STATUS_ORDER, load_candidates
+from data import DATA_DIR, REQUIRED_COLUMNS, STATUS_ORDER, load_candidates, sample_candidates_source
 from fairness import age_groups, flag_rate_ratio, group_report
 from funnel import (
     REQUIRED as FUNNEL_REQUIRED, STAGE_NAMES, by_source, load_funnel,
     stage_counts, stage_durations, time_to_hire,
 )
 from matching import WEIGHTS, rank_candidates, split_items
+from synthetic import generate_employees, generate_hiring_funnel
 
 EMPLOYEES_PATH = DATA_DIR / "employees_synthetic.csv"
 FUNNEL_PATH = DATA_DIR / "hiring_funnel_synthetic.csv"
@@ -24,6 +27,14 @@ st.info(
 
 
 # ---------- helpers ----------
+def sample_or_generate(path, make_df):
+    """Use the CSV in data/ if present, otherwise generate the same synthetic data in memory."""
+    if path.exists():
+        return path
+    return StringIO(make_df().to_csv(index=False, date_format="%Y-%m-%d"))
+
+
+
 def pick_source(label, sample_path, key, hint):
     """Sidebar control: use the built-in sample or upload a CSV. Returns a path/file or None."""
     with st.sidebar.expander(label, expanded=False):
@@ -59,13 +70,13 @@ def numbered(labels):
 # ---------- sidebar: data sources ----------
 st.sidebar.header("Data sources")
 cand_src, cand_is_sample = pick_source(
-    "Candidates", SAMPLE_PATH, "cand",
+    "Candidates", sample_candidates_source(), "cand",
     "Columns: " + ", ".join(REQUIRED_COLUMNS) + ". Skills/Languages comma-separated.")
 funnel_src, funnel_is_sample = pick_source(
-    "Hiring funnel", FUNNEL_PATH, "funnel",
+    "Hiring funnel", sample_or_generate(FUNNEL_PATH, generate_hiring_funnel), "funnel",
     "Columns: " + ", ".join(FUNNEL_REQUIRED) + ". Dates as YYYY-MM-DD; empty if the stage was not reached.")
 emp_src, emp_is_sample = pick_source(
-    "Employees (attrition)", EMPLOYEES_PATH, "emp",
+    "Employees (attrition)", sample_or_generate(EMPLOYEES_PATH, generate_employees), "emp",
     "Columns: " + ", ".join(EMP_REQUIRED) + ". Optional for the audit: " + ", ".join(AUDIT_COLUMNS)
     + ". Works with the public IBM HR Analytics Attrition file.")
 
