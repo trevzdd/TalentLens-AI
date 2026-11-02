@@ -44,7 +44,23 @@ st.set_page_config(
 # ---------------------------------------------------------
 # DESIGN SYSTEM
 # ---------------------------------------------------------
+/* Fix light cards in dark theme */
+[data-testid="stMetric"],
+[data-testid="stMetric"] > div {
+    background-color: #191b22 !important;
+    color: #f3f4f6 !important;
+}
 
+[data-testid="stMetric"] label,
+[data-testid="stMetric"] [data-testid="stMetricValue"],
+[data-testid="stMetric"] [data-testid="stMetricLabel"],
+[data-testid="stMetric"] [data-testid="stMetricDelta"] {
+    color: #f3f4f6 !important;
+}
+
+[data-testid="stSidebar"] {
+    background-color: #191b22 !important;
+}
 st.markdown("""
 <style>
     .block-container {
