@@ -42,84 +42,92 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------
+
+# ---------------------------------------------------------
 # DESIGN SYSTEM
 # ---------------------------------------------------------
 
-[data-testid="stMetric"],
-[data-testid="stMetric"] > div {
-    background-color: #191b22 !important;
-    color: #f3f4f6 !important;
-}
-
-[data-testid="stMetric"] label,
-[data-testid="stMetric"] [data-testid="stMetricValue"],
-[data-testid="stMetric"] [data-testid="stMetricLabel"],
-[data-testid="stMetric"] [data-testid="stMetricDelta"] {
-    color: #f3f4f6 !important;
-}
-
-[data-testid="stSidebar"] {
-    background-color: #191b22 !important;
-}
 st.markdown("""
 <style>
+
+    /* Main layout */
     .block-container {
         max-width: 1450px;
         padding-top: 2rem;
         padding-bottom: 3rem;
     }
 
+    /* Main headings */
     h1 {
-        color: #172554;
+        color: #f3f4f6 !important;
         font-size: 2.5rem !important;
         font-weight: 750 !important;
         letter-spacing: -1px;
     }
 
     h2, h3 {
-        color: #1e293b;
+        color: #f3f4f6 !important;
         font-weight: 650;
     }
 
+    /* Metric cards */
     [data-testid="stMetric"] {
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
+        background-color: #191b22 !important;
+        border: 1px solid #303440 !important;
         padding: 18px;
         border-radius: 12px;
     }
 
-    [data-testid="stSidebar"] {
-        background: #f8fafc;
+    [data-testid="stMetric"] label,
+    [data-testid="stMetric"] [data-testid="stMetricValue"],
+    [data-testid="stMetric"] [data-testid="stMetricLabel"],
+    [data-testid="stMetric"] [data-testid="stMetricDelta"] {
+        color: #f3f4f6 !important;
     }
 
+    /* Sidebar */
+    [data-testid="stSidebar"] {
+        background-color: #191b22 !important;
+    }
+
+    /* Tabs */
     .stTabs [data-baseweb="tab"] {
         font-weight: 600;
     }
 
+    /* Dataframes */
     div[data-testid="stDataFrame"] {
-        border: 1px solid #e2e8f0;
+        border: 1px solid #303440;
         border-radius: 10px;
     }
 
+    /* Hero section */
     .hero-label {
-        color: #64748b;
+        color: #94a3b8;
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 2px;
     }
 
     .hero-description {
-        color: #64748b;
+        color: #94a3b8;
         font-size: 16px;
         margin-top: -8px;
     }
 
     .section-note {
-        color: #64748b;
+        color: #94a3b8;
         font-size: 13px;
     }
+
 </style>
 """, unsafe_allow_html=True)
+
+
+# ---------------------------------------------------------
+# HEADER
+# ---------------------------------------------------------
+
 
 
 # ---------------------------------------------------------
