@@ -44,7 +44,7 @@ st.set_page_config(
 # ---------------------------------------------------------
 # DESIGN SYSTEM
 # ---------------------------------------------------------
-/* Fix light cards in dark theme */
+
 [data-testid="stMetric"],
 [data-testid="stMetric"] > div {
     background-color: #191b22 !important;
