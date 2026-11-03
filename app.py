@@ -27,7 +27,7 @@ from funnel import (
     time_to_hire,
 )
 from matching import WEIGHTS, rank_candidates, split_items
-from syntetyc  import generate_employees, generate_hiring_funnel
+from synthetic import generate_employees, generate_hiring_funnel
 
 
 # ---------------------------------------------------------
